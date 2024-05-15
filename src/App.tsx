@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import About from "./components/about";
 import Cards from "./components/cards";
@@ -11,7 +11,6 @@ import { useFetchData } from "./hooks/useFetchData";
 import { useTest } from "./hooks/useTest";
 
 function App() {
-    const navigate = useNavigate();
     const { value, setValue } = useTest();
     const { data, loading, error } = useFetchData();
 
@@ -36,8 +35,6 @@ function App() {
                     <Route path=":id" element={<Cards data={data} />} />
                 </Route>
             </Routes>
-
-            <button onClick={() => navigate("/")}>이거 눌러봐라</button>
         </>
     );
 }
