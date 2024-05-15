@@ -7,6 +7,7 @@ import Detail from "./components/detail";
 import Error from "./components/error";
 import Header from "./components/header";
 import Home from "./components/home";
+import Loading from "./components/loading";
 import { useFetchData } from "./hooks/useFetchData";
 import { useTest } from "./hooks/useTest";
 
@@ -21,18 +22,17 @@ function App() {
 
     return (
         <>
-            {loading && <p>Loading...</p>}
+            {loading && <Loading />}
             {error && <p>Error: {error.message}</p>}
 
             <Header />
 
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/detail" element={<Detail />} />
-                <Route path="/about" element={<About />} />
+                <Route path="/about" element={<About data={data} />} />
                 <Route path="*" element={<Error />} />
-                <Route path="/detail" element={<Detail />}>
-                    <Route path=":id" element={<Cards data={data} />} />
+                <Route path="/detail" element={<Detail data={data && data} />}>
+                    <Route path=":id" element={<Cards data={data && data} />} />
                 </Route>
             </Routes>
         </>
